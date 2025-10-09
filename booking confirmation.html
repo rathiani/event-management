@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking Confirmation</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+      background: linear-gradient(135deg, #f6d365, #fda085);
+      margin:0;
+    }
+
+    .confirmation-card {
+      background: rgba(255,255,255,0.95);
+      padding:30px;
+      border-radius:16px;
+      text-align:center;
+      box-shadow:0 10px 25px rgba(0,0,0,0.15);
+      width:350px;
+    }
+
+    .confirmation-card h2 {
+      margin-bottom:15px;
+      color:#333;
+    }
+
+    .confirmation-card p {
+      font-size: 14px;
+      color:#555;
+      margin-bottom:15px;
+    }
+
+    .confirmation-card button {
+      padding: 12px 18px;
+      border:none;
+      border-radius:10px;
+      background:#ff6f61;
+      color:white;
+      font-weight:600;
+      cursor:pointer;
+    }
+
+    .confirmation-card button:hover {
+      background:#ff836b;
+    }
+  </style>
+</head>
+<body>
+  <div class="confirmation-card">
+    <h2>Booking Confirmed!</h2>
+    <p id="eventDetails"></p>
+    <button onclick="backToEvents()">Back to Events</button>
+  </div>
+
+  <script>
+    const bookedEvent = JSON.parse(localStorage.getItem('bookedEvent'));
+    const username = localStorage.getItem('username') || "Guest";
+    const eventDetailsDiv = document.getElementById('eventDetails');
+
+    if(bookedEvent){
+      eventDetailsDiv.innerHTML = `Hello <b>${username}</b>, your ticket for <b>${bookedEvent.name}</b> is booked successfully!`;
+    } else {
+      eventDetailsDiv.textContent = "No booking information found.";
+    }
+
+    function backToEvents(){
+      window.location.href = "events.html";
+    }
+  </script>
+</body>
+</html>
