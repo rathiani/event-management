@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome — Event Ticket Booking</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin:0;
+      padding:0;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+      background: linear-gradient(135deg,#f6d365,#fda085);
+    }
+
+    .welcome-card {
+      background: rgba(255,255,255,0.95);
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      text-align: center;
+      width: 350px;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    p {
+      margin-bottom: 20px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 12px 15px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      outline: none;
+      font-size: 14px;
+    }
+
+    .role-btn {
+      padding: 10px 15px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      margin: 5px;
+      color: white;
+      flex: 1;
+    }
+
+    .admin-btn {
+      background: #6b5b95;
+    }
+
+    .user-btn {
+      background: #ff6f61;
+    }
+
+    .role-btn:hover {
+      opacity: 0.85;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      background: #333;
+      color: white;
+      margin-top: 10px;
+    }
+
+    .status {
+      margin-top: 12px;
+      padding: 10px;
+      border-radius: 10px;
+      background: rgba(0,255,0,0.2);
+      display: none;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+<div class="welcome-card">
+  <h2>Welcome to Event Booking</h2>
+  <p>Select your role and login</p>
+
+  <div style="display:flex; justify-content:center; gap:10px; margin-bottom:15px;">
+    <button class="role-btn admin-btn active" id="adminRole">Admin</button>
+    <button class="role-btn user-btn" id="userRole">User</button>
+  </div>
+
+  <form id="loginForm" onsubmit="return false;">
+    <input type="text" id="username" placeholder="Enter your username" required />
+    <input type="password" id="password" placeholder="Enter password (any works)" required />
+    <button type="submit" class="login-btn">Login</button>
+  </form>
+
+  <div id="status" class="status"></div>
+</div>
+
+<script>
+  const adminBtn = document.getElementById('adminRole');
+  const userBtn = document.getElementById('userRole');
+  let selectedRole = 'Admin';
+
+  function setRole(role) {
+    selectedRole = role;
+    if(role === 'Admin'){
+      adminBtn.classList.add('active');
+      userBtn.classList.remove('active');
+    } else {
+      userBtn.classList.add('active');
+      adminBtn.classList.remove('active');
+    }
+  }
+
+  adminBtn.addEventListener('click', ()=> setRole('Admin'));
+  userBtn.addEventListener('click', ()=> setRole('User'));
+
+  const loginForm = document.getElementById('loginForm');
+  const statusDiv = document.getElementById('status');
+
+  loginForm.addEventListener('submit', () => {
+    const username = document.getElementById('username').value || 'Guest';
+    // Demo: any password works
+    localStorage.setItem('username', username);
+    localStorage.setItem('role', selectedRole);
+
+    statusDiv.style.display = 'block';
+    statusDiv.textContent = `${selectedRole} "${username}" logged in successfully. Redirecting...`;
+
+    setTimeout(()=>{
+      if(selectedRole === 'Admin'){
+        window.location.href = 'admin-dashboard.html'; // admin page
+      } else {
+        window.location.href = 'events.html'; // user page
+      }
+    }, 1000);
+  });
+</script>
+
+</body>
+</html>
