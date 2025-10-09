@@ -1,3 +1,3 @@
 # event-management
 
-## URL:https://github.com/rathiani/event-management.git 
+## URL:https://github.com/rathiani/event-management.git  
