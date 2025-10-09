@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logging Out...</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #f6d365, #fda085);
+      margin: 0;
+      color: #333;
+      text-align: center;
+    }
+
+    .message {
+      background: rgba(255,255,255,0.95);
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+  </style>
+</head>
+<body>
+  <div class="message">
+    <h2>Logging Out...</h2>
+    <p>Please wait, you are being redirected to login page.</p>
+  </div>
+
+  <script>
+    // Clear all stored user data
+    localStorage.removeItem('username');
+    localStorage.removeItem('bookedEvent');
+
+    // Redirect to login page after 1 second
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 1000);
+  </script>
+</body>
+</html>
